@@ -8,6 +8,11 @@
 	<title>@yield('title')</title>
 	<!-- Bootstrap CSS -->
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+	<style>
+		.swal2-modal {
+			background-color: rgba(43, 165, 137, 0.45);
+		}
+	</style>
 </head>
 <body>
 	@include('layouts.navigation')
