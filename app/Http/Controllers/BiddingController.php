@@ -12,7 +12,7 @@ class BiddingController extends Controller
     public function index()
     {
         $data_bidding = Bidding::get();
-        return view('auth.bidding.index',['data_bidding' => $data_bidding]);
+        return view('auth.bidding.ajax_bidding',['data_bidding' => $data_bidding]);
     }
 
     public function store(Request $request)
@@ -26,15 +26,25 @@ class BiddingController extends Controller
             ]
         );
         if ($validator->passes()) {
-            $response = Bidding::create($request->all());
+            $result = Bidding::create($request->all());
             return response()->json([
                 'success'=> 'Data berhasil ditambahkan!',
-                'data' => $response
+                'data' => $result
             ], 200);
         }
         return response()->json([
             'error'=> $validator->errors()->all()
         ]);
+    }
+
+    public function show(Bidding $bidding)
+    {
+
+    }
+
+    public function edit(Request $request, Bidding $bidding)
+    {
+
     }
 
     public function update(Request $request, Bidding $bidding)
@@ -49,10 +59,10 @@ class BiddingController extends Controller
         );
         if ($validator->passes()) {
             $bidding->update($request->all());
-            $response = $bidding['opening'];
+            $opening = $bidding;
             return response()->json([
                 'success'=> 'Data berhasil diperbaharui!',
-                'data' => $response
+                'data' => $opening
             ], 200);
         }
         return response()->json([
